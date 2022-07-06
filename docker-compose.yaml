@@ -1,0 +1,13 @@
+version: '3.5'
+
+services:
+  password-manager-postgres:
+    container_name: "paman-api-postgresql"
+    image: postgres:13
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_ROOT_PASSWORD: afzGiNNoUrtJQ3IEf9TF
+      POSTGRES_DB: passmanager-db
+      POSTGRES_USER: passmanager
+      POSTGRES_PASSWORD: afzGiNNoUrtJQ3IEf9TF
