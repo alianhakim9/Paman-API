@@ -2,36 +2,35 @@ package com.alianhakim.api.service.impl
 
 import com.alianhakim.api.entity.Users
 import com.alianhakim.api.exception.InvalidPasswordException
+import com.alianhakim.api.exception.UserNotFoundException
 import com.alianhakim.api.model.AuthRequest
 import com.alianhakim.api.model.AuthResponse
 import com.alianhakim.api.repository.UsersRepository
 import com.alianhakim.api.service.UserService
-import com.alianhakim.api.utils.Helper
 import com.alianhakim.api.utils.ValidationUtil
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 import java.util.*
-import javax.servlet.http.Cookie
 
 @Service
 class UserServiceImpl(
     private val validationUtil: ValidationUtil,
     private val repository: UsersRepository,
-    private val helper: Helper
 ) : UserService {
 
     private val passwordEncoder = BCryptPasswordEncoder()
 
     override fun login(username: String, password: String): AuthResponse {
-        val user = repository.findByUsername(username)
-        helper.userNotFound(user)
-        val validatePassword = passwordEncoder.matches(password, user.get().password)
+        val user = repository.findByUsername(username).orElseThrow {
+            UserNotFoundException()
+        }
+        val validatePassword = passwordEncoder.matches(password, user.password)
         if (!validatePassword) {
             throw InvalidPasswordException()
         }
-        val issuer = user.get().id.toString()
+        val issuer = user.id.toString()
         val jwt = Jwts.builder()
             .setIssuer(issuer)
             .setExpiration(Date(System.currentTimeMillis() + 60 * 24 * 1000))
@@ -46,8 +45,7 @@ class UserServiceImpl(
          */
 
         return AuthResponse(
-            userId = user.get().id.toString(),
-            token = jwt
+            userId = user.id.toString()
         )
     }
 
@@ -59,10 +57,8 @@ class UserServiceImpl(
         )
         newUsers.createdAt = Date()
         repository.save(newUsers)
-        validationUtil.validate(repository.save(newUsers))
         return AuthResponse(
-            userId = newUsers.id.toString(),
-            token = "Bearer"
+            userId = newUsers.id.toString()
         )
     }
 }

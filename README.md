@@ -29,8 +29,7 @@ Response:
 ```json
 {
   "data": {
-    "user_id": "string",
-    "auth_token": "string"
+    "userId": "string"
   },
   "message": "login success",
   "status": "string"
@@ -62,7 +61,7 @@ Response:
   "data": {
     "username": "string",
     "password": "string",
-    "user_id": "string"
+    "userId": "string"
   },
   "message": "string",
   "status": "string"
@@ -78,7 +77,6 @@ Request
 * Method : GET
 * Header:
     * Content-Type: application/json
-    * Authorization: Bearer Token
 * Endpoint: ```/api/v1/password-manager/{id}```
 
 Response:
@@ -105,7 +103,6 @@ Request
 * Method : GET
 * Header:
     * Content-Type: application/json
-    * Authorization: Bearer Token
 * Endpoint: ```/api/v1/password-manager/{userId}```
 
 Response:
@@ -143,7 +140,6 @@ Request
 * Header:
     * Content-Type: application/json
     * Accept: application/json
-    * Authorization: Bearer Token
 * Endpoint: ```/api/v1/auth/password-manager/```
 * Body:
 
@@ -161,9 +157,11 @@ Response:
 ```json
 {
   "data": {
-    "username": "string",
-    "password": "string",
-    "user_id": "string"
+    "id": "string",
+    "pmUsername": "string",
+    "pmPassword": "string",
+    "createdAt": "date",
+    "updatedAt": "date"
   },
   "message": "string",
   "status": "string"
@@ -178,7 +176,6 @@ Request
 * Header:
     * Content-Type: application/json
     * Accept: application/json
-    * Authorization: Bearer Token
 * Endpoint: ```/api/v1/auth/password-manager/```
 * Body:
 
@@ -196,9 +193,11 @@ Response:
 ```json
 {
   "data": {
-    "username": "string",
-    "password": "string",
-    "user_id": "string"
+    "id": "string",
+    "pmUsername": "string",
+    "pmPassword": "string",
+    "createdAt": "date",
+    "updatedAt": "date"
   },
   "message": "string",
   "status": "string"
@@ -212,7 +211,6 @@ Request
 * Method : DELETE
 * Header:
     * Content-Type: application/json
-    * Authorization: Bearer Token
 * Endpoint: ```/api/v1/auth/password-manager/```
 
 Response:
@@ -234,7 +232,6 @@ Request
 * Method : GET
 * Header:
     * Content-Type: application/json
-    * Authorization: Bearer Token
 * Endpoint: ```/api/v1/personal-info/{id}```
 
 Response:
@@ -262,7 +259,6 @@ Request
 * Method : GET
 * Header:
     * Content-Type: application/json
-    * Authorization: Bearer Token
 * Endpoint: ```/api/v1/personal-info/{userId}```
 
 Response:
@@ -302,7 +298,6 @@ Request
 * Header:
     * Content-Type: application/json
     * Accept: application/json
-    * Authorization: Bearer Token
 * Endpoint: ```/api/v1/auth/personal-info/```
 * Body:
 
@@ -342,7 +337,6 @@ Request
 * Header:
     * Content-Type: application/json
     * Accept: application/json
-    * Authorization: Bearer Token
 * Endpoint: ```/api/v1/auth/personal-info/```
 * Body:
 
@@ -381,7 +375,6 @@ Request
 * Method : DELETE
 * Header:
     * Content-Type: application/json
-    * Authorization: Bearer Token
 * Endpoint: ```/api/v1/auth/personal-info/```
 
 Response:
@@ -403,7 +396,6 @@ Request
 * Method : GET
 * Header:
     * Content-Type: application/json
-    * Authorization: Bearer Token
 * Endpoint: ```/api/v1/note/{id}```
 
 Response:
@@ -429,7 +421,6 @@ Request
 * Method : GET
 * Header:
     * Content-Type: application/json
-    * Authorization: Bearer Token
 * Endpoint: ```/api/v1/note/{userId}```
 
 Response:
@@ -465,7 +456,6 @@ Request
 * Header:
     * Content-Type: application/json
     * Accept: application/json
-    * Authorization: Bearer Token
 * Endpoint: ```/api/v1/note/```
 * Body:
 
