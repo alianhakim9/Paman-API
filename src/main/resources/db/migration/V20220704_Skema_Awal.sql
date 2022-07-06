@@ -9,6 +9,9 @@ create TABLE users(
 alter table ONLY users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
 
+alter table if exists users
+       add constraint UK_r43af9ap4edm43mmtq01oddj6 unique (username);
+
 create TABLE password_manager(
     id character varying(36) NOT NULL,
     created_at timestamp without time zone,
@@ -29,13 +32,19 @@ create TABLE personal_info(
     id character varying(36) NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    pi_address character varying(255),
-    pi_company character varying(50),
-    pi_email character varying(100),
-    pi_phone_number character varying(50),
-    pi_website character varying(50),
+    pi_address character varying(255) ,
+    pi_company character varying(50) ,
+    pi_email character varying(100) ,
+    pi_phone_number character varying(50) ,
+    pi_website character varying(50) ,
     user_id character varying(36)
 );
+
+alter table if exists personal_info
+       add constraint UK_email unique (pi_email);
+
+alter table if exists personal_info
+       add constraint UK_phone_number unique (pi_phone_number);
 
 alter table ONLY personal_info
     ADD CONSTRAINT personal_info_pkey PRIMARY KEY (id);
@@ -51,6 +60,9 @@ create TABLE note(
     note_title character varying(100),
     user_id character varying(36)
 );
+
+alter table if exists note
+       add constraint UK_note_title unique (note_title);
 
 alter table ONLY note
     ADD CONSTRAINT note_pkey PRIMARY KEY (id);

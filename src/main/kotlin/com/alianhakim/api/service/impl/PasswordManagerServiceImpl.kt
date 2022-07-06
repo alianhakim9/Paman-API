@@ -1,6 +1,7 @@
 package com.alianhakim.api.service.impl
 
 import com.alianhakim.api.entity.PasswordManager
+import com.alianhakim.api.exception.UnAuthorizedException
 import com.alianhakim.api.model.PasswordManagerRequest
 import com.alianhakim.api.model.PasswordManagerResponse
 import com.alianhakim.api.model.PasswordManagerUpdateRequest
@@ -9,6 +10,7 @@ import com.alianhakim.api.repository.UsersRepository
 import com.alianhakim.api.service.PasswordManagerService
 import com.alianhakim.api.utils.Helper
 import com.alianhakim.api.utils.ValidationUtil
+import io.jsonwebtoken.Jwts
 import org.springframework.stereotype.Service
 import java.util.*
 

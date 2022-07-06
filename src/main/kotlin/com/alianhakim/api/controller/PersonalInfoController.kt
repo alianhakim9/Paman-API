@@ -20,9 +20,7 @@ class PersonalInfoController(
     @PostMapping(consumes = ["application/json"], produces = ["application/json"])
     fun create(
         @Valid @RequestBody request: PersonalInfoRequest,
-        error: Errors
     ): ResponseEntity<Any> {
-        if (error.hasErrors()) throw ValidationErrorException(error.fieldErrors.toString())
         return ResponseHandler.generatedResponse(
             message = "create password manager",
             status = HttpStatus.OK,

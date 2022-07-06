@@ -1,16 +1,16 @@
 package com.alianhakim.api.entity
 
-import javax.persistence.Entity
-import javax.persistence.FetchType
-import javax.persistence.JoinColumn
-import javax.persistence.ManyToOne
+import javax.persistence.*
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotEmpty
 import javax.validation.constraints.Size
 
 @Entity
+@Table(
+    uniqueConstraints = [UniqueConstraint(name = "note_title_unique)", columnNames = ["noteTitle"])]
+)
 data class Note(
-    @field:NotBlank @field:NotEmpty @field:Size(max = 100)
+    @field:NotBlank @field:NotEmpty @field:Size(max = 100) @field:Column(unique = true)
     var noteTitle: String,
     @field:NotBlank @field:NotEmpty
     var noteDescription: String,
