@@ -2,6 +2,8 @@
 
 Berikut adalah dokumentasi API Spec untuk PAMAN-API
 
+BASE URL : https://paman-api.herokuapp.com/
+
 ## Auth
 
 Endpoint ini digunakan untuk melakukan autentikasi user sebelum mengakses endpoint lainnya.
@@ -28,9 +30,7 @@ Response:
 
 ```json
 {
-  "data": {
-    "userId": "string"
-  },
+  "data": "string",
   "message": "login success",
   "status": "string"
 }
