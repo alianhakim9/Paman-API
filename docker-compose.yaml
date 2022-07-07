@@ -1,6 +1,15 @@
 version: '3.5'
 
 services:
+  password-manager-api:
+    container_name: paman-api
+    image: paman-api:0.0.1
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_USERNAME: passmanager
+      DATABASE_PASSWORD: afzGiNNoUrtJQ3IEf9TF
+      DATABASE_URL: jdbc:postgresql://paman-api-postgresql:5432/passmanager-db
   password-manager-postgres:
     container_name: "paman-api-postgresql"
     image: postgres:13
