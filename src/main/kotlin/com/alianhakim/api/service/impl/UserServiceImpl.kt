@@ -4,12 +4,9 @@ import com.alianhakim.api.entity.Users
 import com.alianhakim.api.exception.InvalidPasswordException
 import com.alianhakim.api.exception.UserNotFoundException
 import com.alianhakim.api.model.AuthRequest
-import com.alianhakim.api.model.AuthResponse
 import com.alianhakim.api.repository.UsersRepository
 import com.alianhakim.api.service.UserService
 import com.alianhakim.api.utils.ValidationUtil
-import io.jsonwebtoken.Jwts
-import io.jsonwebtoken.SignatureAlgorithm
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 import java.util.*
@@ -30,12 +27,12 @@ class UserServiceImpl(
         if (!validatePassword) {
             throw InvalidPasswordException()
         }
-        val issuer = user.id.toString()
-        val jwt = Jwts.builder()
-            .setIssuer(issuer)
-            .setExpiration(Date(System.currentTimeMillis() + 60 * 24 * 1000))
-            .signWith(SignatureAlgorithm.HS512, "passmanager-secret-key")
-            .compact()
+//        val issuer = user.id.toString()
+//        val jwt = Jwts.builder()
+//            .setIssuer(issuer)
+//            .setExpiration(Date(System.currentTimeMillis() + 60 * 24 * 1000))
+//            .signWith(SignatureAlgorithm.HS512, "passmanager-secret-key")
+//            .compact()
 
         /*
             val cookie = Cookie("jwt", jwt)
@@ -47,7 +44,7 @@ class UserServiceImpl(
         return user.id.toString()
     }
 
-    override fun register(request: AuthRequest): AuthResponse {
+    override fun register(request: AuthRequest): String {
         validationUtil.validate(request)
         val newUsers = Users(
             username = request.username!!,
@@ -55,8 +52,6 @@ class UserServiceImpl(
         )
         newUsers.createdAt = Date()
         repository.save(newUsers)
-        return AuthResponse(
-            userId = newUsers.id.toString()
-        )
+        return newUsers.id.toString()
     }
 }
