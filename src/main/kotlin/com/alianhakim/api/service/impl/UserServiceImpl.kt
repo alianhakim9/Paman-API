@@ -22,7 +22,7 @@ class UserServiceImpl(
 
     private val passwordEncoder = BCryptPasswordEncoder()
 
-    override fun login(username: String, password: String): AuthResponse {
+    override fun login(username: String, password: String): String {
         val user = repository.findByUsername(username).orElseThrow {
             UserNotFoundException()
         }
@@ -44,9 +44,7 @@ class UserServiceImpl(
             response.addCookie(cookie)
          */
 
-        return AuthResponse(
-            userId = user.id.toString()
-        )
+        return user.id.toString()
     }
 
     override fun register(request: AuthRequest): AuthResponse {
