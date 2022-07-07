@@ -9,9 +9,4 @@ class HomeController {
     fun index(): String {
         return "index.html"
     }
-
-    @RequestMapping("error")
-    fun error(): String {
-        return "error page"
-    }
 }

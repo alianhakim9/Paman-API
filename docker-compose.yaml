@@ -10,6 +10,7 @@ services:
       DATABASE_USERNAME: passmanager
       DATABASE_PASSWORD: afzGiNNoUrtJQ3IEf9TF
       DATABASE_URL: jdbc:postgresql://paman-api-postgresql:5432/passmanager-db
+      DATABASE_DDL: create-drop
   password-manager-postgres:
     container_name: "paman-api-postgresql"
     image: postgres:13
