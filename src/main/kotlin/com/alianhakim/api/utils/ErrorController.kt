@@ -22,54 +22,42 @@ class ErrorController {
     @ExceptionHandler(UserNotFoundException::class)
     fun userNotFoundHandler(): ResponseEntity<Any> {
         return generatedResponse(
-            message = "User not found",
-            status = HttpStatus.NOT_FOUND,
-            data = "NULL"
+            message = "User not found", status = HttpStatus.NOT_FOUND, data = "NULL"
         )
     }
 
     @ExceptionHandler(value = [ConstraintViolationException::class])
     fun validationHandler(e: ConstraintViolationException): ResponseEntity<Any> {
         return generatedResponse(
-            message = e.message.toString(),
-            status = HttpStatus.BAD_REQUEST,
-            data = "NULL"
+            message = e.message.toString(), status = HttpStatus.BAD_REQUEST, data = "NULL"
         )
     }
 
     @ExceptionHandler(value = [NotFoundException::class])
     fun notFoundHandler(e: NotFoundException): ResponseEntity<Any> {
         return generatedResponse(
-            message = "data not found",
-            status = HttpStatus.NOT_FOUND,
-            data = "NULL"
+            message = "data not found", status = HttpStatus.NOT_FOUND, data = "NULL"
         )
     }
 
     @ExceptionHandler(value = [InvalidPasswordException::class])
     fun invalidPasswordHandler(): ResponseEntity<Any> {
         return generatedResponse(
-            message = "invalid password",
-            status = HttpStatus.BAD_REQUEST,
-            data = "NULL"
+            message = "invalid password", status = HttpStatus.BAD_REQUEST, data = "NULL"
         )
     }
 
     @ExceptionHandler(value = [UnAuthorizedException::class])
     fun unAuthorizedHandler(): ResponseEntity<Any> {
         return generatedResponse(
-            message = "unauthorized",
-            status = HttpStatus.UNAUTHORIZED,
-            data = "NULL"
+            message = "unauthorized", status = HttpStatus.UNAUTHORIZED, data = "NULL"
         )
     }
 
     @ExceptionHandler(value = [SQLException::class])
     fun sqlException(e: SQLException): ResponseEntity<Any> {
         return generatedResponse(
-            message = e.message.toString(),
-            status = HttpStatus.BAD_REQUEST,
-            data = "NULL"
+            message = e.message.toString(), status = HttpStatus.CONFLICT, data = "NULL"
         )
     }
 }
