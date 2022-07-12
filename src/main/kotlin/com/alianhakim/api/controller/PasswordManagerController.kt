@@ -54,6 +54,7 @@ class PasswordManagerController(
     fun delete(
             @PathVariable("id") id: String
     ): ResponseEntity<Any> {
+        pmService.delete(id)
         return generatedResponse(
                 message = "delete password manager",
                 status = HttpStatus.OK,
