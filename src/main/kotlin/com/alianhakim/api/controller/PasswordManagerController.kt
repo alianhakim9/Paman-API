@@ -1,6 +1,5 @@
 package com.alianhakim.api.controller
 
-import com.alianhakim.api.exception.UnAuthorizedException
 import com.alianhakim.api.model.PasswordManagerRequest
 import com.alianhakim.api.model.PasswordManagerUpdateRequest
 import com.alianhakim.api.service.impl.PasswordManagerServiceImpl
@@ -14,62 +13,62 @@ import javax.validation.Valid
 @RestController
 @RequestMapping(path = ["/api/v1/password-manager/"])
 class PasswordManagerController(
-    @Autowired val pmService: PasswordManagerServiceImpl,
+        @Autowired val pmService: PasswordManagerServiceImpl,
 ) {
 
     @PostMapping(consumes = ["application/json"], produces = ["application/json"])
     fun create(
-        @Valid @RequestBody request: PasswordManagerRequest,
+            @Valid @RequestBody request: PasswordManagerRequest,
     ): ResponseEntity<Any> {
         return generatedResponse(
-            message = "create password manager",
-            status = HttpStatus.OK,
-            data = pmService.create(request)
+                message = "create password manager",
+                status = HttpStatus.OK,
+                data = pmService.create(request)
         )
     }
 
     @GetMapping("{id}", produces = ["application/json"])
     fun get(
-        @PathVariable("id") id: String,
+            @PathVariable("id") id: String,
     ): ResponseEntity<Any> {
         return generatedResponse(
-            message = "create password manager",
-            status = HttpStatus.OK,
-            data = pmService.get(id)
+                message = "create password manager",
+                status = HttpStatus.OK,
+                data = pmService.get(id)
         )
     }
 
     @PutMapping("{id}", produces = ["application/json"], consumes = ["application/json"])
     fun update(
-        @PathVariable("id") id: String,
-        @Valid @RequestBody request: PasswordManagerUpdateRequest
+            @PathVariable("id") id: String,
+            @Valid @RequestBody request: PasswordManagerUpdateRequest
     ): ResponseEntity<Any> {
         return generatedResponse(
-            message = "update password manager",
-            status = HttpStatus.OK,
-            data = pmService.update(id, request)
+                message = "update password manager",
+                status = HttpStatus.OK,
+                data = pmService.update(id, request)
         )
     }
 
     @DeleteMapping("{id}", produces = ["application/json"])
     fun delete(
-        @PathVariable("id") id: String
+            @PathVariable("id") id: String
     ): ResponseEntity<Any> {
         return generatedResponse(
-            message = "delete password manager",
-            status = HttpStatus.OK,
-            data = pmService.delete(id)
+                message = "delete password manager",
+                status = HttpStatus.OK,
+                data = "DELETED"
         )
     }
 
     @GetMapping("/user/{userId}", produces = ["application/json"])
     fun getByUserId(
-        @PathVariable("userId") userId: String
+            @PathVariable("userId") userId: String
     ): ResponseEntity<Any> {
         return generatedResponse(
-            message = "password manager by user id",
-            status = HttpStatus.OK,
-            data = pmService.getByUserId(userId)
+                message = "password manager by user id",
+                status = HttpStatus.OK,
+                data = pmService.getByUserId(userId)
         )
     }
 }
