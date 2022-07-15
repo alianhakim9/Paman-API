@@ -52,13 +52,13 @@ alter table ONLY personal_info
 alter table ONLY personal_info
     ADD CONSTRAINT fk2ooyctbfk03w21tuk720ixnqh FOREIGN KEY (user_id) REFERENCES users(id);
 
-create TABLE note(
-    id character varying(36) NOT NULL,
+CREATE TABLE note (
+    id character varying(255) NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    note_description character varying(255),
+    note_description oid,
     note_title character varying(100),
-    user_id character varying(36)
+    user_id character varying(255)
 );
 
 alter table if exists note
