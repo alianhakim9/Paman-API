@@ -22,9 +22,7 @@ class PersonalInfoController(
         @Valid @RequestBody request: PersonalInfoRequest,
     ): ResponseEntity<Any> {
         return ResponseHandler.generatedResponse(
-            message = "create password manager",
-            status = HttpStatus.OK,
-            data = piService.create(request)
+            message = "create personal info", status = HttpStatus.OK, data = piService.create(request)
         )
     }
 
@@ -33,21 +31,16 @@ class PersonalInfoController(
         @PathVariable("id") id: String
     ): ResponseEntity<Any> {
         return ResponseHandler.generatedResponse(
-            message = "create password manager",
-            status = HttpStatus.OK,
-            data = piService.get(id)
+            message = "create personal info", status = HttpStatus.OK, data = piService.get(id)
         )
     }
 
     @PutMapping("{id}", produces = ["application/json"], consumes = ["application/json"])
     fun update(
-        @PathVariable("id") id: String,
-        @Valid @RequestBody request: PersonalInfoUpdateRequest
+        @PathVariable("id") id: String, @Valid @RequestBody request: PersonalInfoUpdateRequest
     ): ResponseEntity<Any> {
         return ResponseHandler.generatedResponse(
-            message = "update password manager",
-            status = HttpStatus.OK,
-            data = piService.update(id, request)
+            message = "update personal info", status = HttpStatus.OK, data = piService.update(id, request)
         )
     }
 
@@ -55,10 +48,9 @@ class PersonalInfoController(
     fun delete(
         @PathVariable("id") id: String
     ): ResponseEntity<Any> {
+        piService.delete(id)
         return ResponseHandler.generatedResponse(
-            message = "delete password manager",
-            status = HttpStatus.OK,
-            data = piService.delete(id)
+            message = "delete personal info", status = HttpStatus.OK, data = "DELETED"
         )
     }
 
@@ -67,9 +59,7 @@ class PersonalInfoController(
         @PathVariable("userId") userId: String
     ): ResponseEntity<Any> {
         return ResponseHandler.generatedResponse(
-            message = "password manager by user id",
-            status = HttpStatus.OK,
-            data = piService.getByUserId(userId)
+            message = "personal info by user id", status = HttpStatus.OK, data = piService.getByUserId(userId)
         )
     }
 }

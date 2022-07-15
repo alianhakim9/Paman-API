@@ -22,9 +22,7 @@ class NoteController(
         @Valid @RequestBody request: NoteRequest,
     ): ResponseEntity<Any> {
         return ResponseHandler.generatedResponse(
-            message = "create password manager",
-            status = HttpStatus.OK,
-            data = noteService.create(request)
+            message = "create note", status = HttpStatus.OK, data = noteService.create(request)
         )
     }
 
@@ -33,21 +31,16 @@ class NoteController(
         @PathVariable("id") id: String
     ): ResponseEntity<Any> {
         return ResponseHandler.generatedResponse(
-            message = "create password manager",
-            status = HttpStatus.OK,
-            data = noteService.get(id)
+            message = "create note", status = HttpStatus.OK, data = noteService.get(id)
         )
     }
 
     @PutMapping("{id}", produces = ["application/json"], consumes = ["application/json"])
     fun update(
-        @PathVariable("id") id: String,
-        @Valid @RequestBody request: NoteUpdateRequest
+        @PathVariable("id") id: String, @Valid @RequestBody request: NoteUpdateRequest
     ): ResponseEntity<Any> {
         return ResponseHandler.generatedResponse(
-            message = "update password manager",
-            status = HttpStatus.OK,
-            data = noteService.update(id, request)
+            message = "update note", status = HttpStatus.OK, data = noteService.update(id, request)
         )
     }
 
@@ -55,10 +48,9 @@ class NoteController(
     fun delete(
         @PathVariable("id") id: String
     ): ResponseEntity<Any> {
+        noteService.delete(id)
         return ResponseHandler.generatedResponse(
-            message = "delete password manager",
-            status = HttpStatus.OK,
-            data = noteService.delete(id)
+            message = "delete note", status = HttpStatus.OK, data = "DELETED"
         )
     }
 
@@ -67,9 +59,7 @@ class NoteController(
         @PathVariable("userId") userId: String
     ): ResponseEntity<Any> {
         return ResponseHandler.generatedResponse(
-            message = "password manager by user id",
-            status = HttpStatus.OK,
-            data = noteService.getByUserId(userId)
+            message = "note by user id", status = HttpStatus.OK, data = noteService.getByUserId(userId)
         )
     }
 }
