@@ -56,7 +56,7 @@ CREATE TABLE note (
     id character varying(255) NOT NULL,
     created_at timestamp without time zone,
     updated_at timestamp without time zone,
-    note_description oid,
+    note_description character varying(255),
     note_title character varying(100),
     user_id character varying(255)
 );

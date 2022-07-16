@@ -1,6 +1,5 @@
 package com.alianhakim.api.controller
 
-import com.alianhakim.api.exception.ValidationErrorException
 import com.alianhakim.api.model.PersonalInfoRequest
 import com.alianhakim.api.model.PersonalInfoUpdateRequest
 import com.alianhakim.api.service.impl.PersonalInfoServiceImpl
@@ -8,7 +7,6 @@ import com.alianhakim.api.utils.ResponseHandler
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.validation.Errors
 import org.springframework.web.bind.annotation.*
 import javax.validation.Valid
 
