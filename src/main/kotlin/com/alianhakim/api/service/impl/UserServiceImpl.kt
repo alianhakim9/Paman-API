@@ -60,8 +60,7 @@ class UserServiceImpl(
         val user = repository.findByUsername(username).orElseThrow {
             UserNotFoundException()
         }
-
-        user.password = newPassword
+        user.password = passwordEncoder.encode(newPassword)
         repository.save(user)
     }
 }
