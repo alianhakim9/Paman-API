@@ -21,5 +21,5 @@ data class Users(
 
     @field:NotBlank
     @field:NotEmpty
-    val password: String,
+    var password: String,
 ) : BaseEntity()

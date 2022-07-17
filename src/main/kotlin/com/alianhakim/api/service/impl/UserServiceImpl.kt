@@ -7,6 +7,7 @@ import com.alianhakim.api.model.AuthRequest
 import com.alianhakim.api.repository.UsersRepository
 import com.alianhakim.api.service.UserService
 import com.alianhakim.api.utils.ValidationUtil
+import javassist.NotFoundException
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 import java.util.*
@@ -47,11 +48,20 @@ class UserServiceImpl(
     override fun register(request: AuthRequest): String {
         validationUtil.validate(request)
         val newUsers = Users(
-            username = request.username!!,
-            password = passwordEncoder.encode(request.password!!)
+            username = request.username!!, password = passwordEncoder.encode(request.password!!)
         )
         newUsers.createdAt = Date()
         repository.save(newUsers)
         return newUsers.id.toString()
+    }
+
+    override fun forgotPassword(username: String, newPassword: String) {
+        validationUtil.validate(username)
+        val user = repository.findByUsername(username).orElseThrow {
+            UserNotFoundException()
+        }
+
+        user.password = newPassword
+        repository.save(user)
     }
 }

@@ -1,12 +1,14 @@
 package com.alianhakim.api.controller
 
 import com.alianhakim.api.model.AuthRequest
+import com.alianhakim.api.model.ResetPasswordRequest
 import com.alianhakim.api.service.impl.UserServiceImpl
 import com.alianhakim.api.utils.ResponseHandler
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -20,8 +22,7 @@ class UserController(
 
     @PostMapping("/login", produces = ["application/json"], consumes = ["application/json"])
     fun login(
-        @Valid
-        @RequestBody authRequest: AuthRequest
+        @Valid @RequestBody authRequest: AuthRequest
     ): ResponseEntity<Any> {
         return ResponseHandler.generatedResponse(
             message = "login success",
@@ -32,13 +33,21 @@ class UserController(
 
     @PostMapping("/register", produces = ["application/json"], consumes = ["application/json"])
     fun register(
-        @Valid
-        @RequestBody authRequest: AuthRequest,
+        @Valid @RequestBody authRequest: AuthRequest,
     ): ResponseEntity<Any> {
         return ResponseHandler.generatedResponse(
-            message = "register success",
+            message = "register success", status = HttpStatus.OK, data = service.register(authRequest)
+        )
+    }
+
+    @PutMapping("/reset-password", produces = ["application/json"], consumes = ["application/json"])
+    fun resetPassword(
+        @RequestBody request: ResetPasswordRequest
+    ): ResponseEntity<Any> {
+        return ResponseHandler.generatedResponse(
+            message = "reset password success",
             status = HttpStatus.OK,
-            data = service.register(authRequest)
+            data = service.forgotPassword(request.username, request.newPassword)
         )
     }
 }
