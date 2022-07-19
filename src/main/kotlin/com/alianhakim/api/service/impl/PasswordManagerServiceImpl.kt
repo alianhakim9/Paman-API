@@ -10,6 +10,7 @@ import com.alianhakim.api.repository.UsersRepository
 import com.alianhakim.api.service.PasswordManagerService
 import com.alianhakim.api.utils.ValidationUtil
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 import java.util.*
 
@@ -20,6 +21,7 @@ class PasswordManagerServiceImpl(
     val validationUtil: ValidationUtil,
 ) : PasswordManagerService {
 
+    private val passwordEncoder = BCryptPasswordEncoder()
     override fun create(request: PasswordManagerRequest): PasswordManagerResponse {
         validationUtil.validate(request)
         val user = usersRepository.findById(request.userId!!).orElseThrow {
@@ -27,7 +29,7 @@ class PasswordManagerServiceImpl(
         }
         val pm = PasswordManager(
             pmUsername = request.pmUsername!!,
-            pmPassword = request.pmPassword!!,
+            pmPassword = passwordEncoder.encode(request.pmPassword!!),
             pmWebsite = request.pmWebsite!!,
             user = user,
         )
