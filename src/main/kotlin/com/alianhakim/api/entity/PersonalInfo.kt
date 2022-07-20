@@ -7,9 +7,6 @@ import javax.validation.constraints.NotEmpty
 import javax.validation.constraints.Size
 
 @Entity
-@Table(
-    uniqueConstraints = [UniqueConstraint(name = "email_unique)", columnNames = ["piEmail"])]
-)
 data class PersonalInfo(
     @field:NotBlank @field:NotEmpty @field:Size(max = 13) @field:Column(unique = true)
     var piPhoneNumber: String,

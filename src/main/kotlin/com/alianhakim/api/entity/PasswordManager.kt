@@ -8,7 +8,6 @@ import javax.validation.constraints.Size
 @Entity
 data class PasswordManager(
     @field:NotBlank @field:NotEmpty @field:Size(max = 100)
-    @field:Column(unique = true)
     var pmUsername: String,
 
     @field:NotBlank @field:NotEmpty @field:Size(max = 50)
