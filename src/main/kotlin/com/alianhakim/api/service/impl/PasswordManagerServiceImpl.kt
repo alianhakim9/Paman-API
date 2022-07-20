@@ -29,7 +29,7 @@ class PasswordManagerServiceImpl(
         }
         val pm = PasswordManager(
             pmUsername = request.pmUsername!!,
-            pmPassword = passwordEncoder.encode(request.pmPassword!!),
+            pmPassword = request.pmPassword!!,
             pmWebsite = request.pmWebsite!!,
             user = user,
         )
